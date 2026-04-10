@@ -6,6 +6,10 @@ export default function Now() {
       <p className="page-kicker">Now</p>
       <h1 className="now-title">What I'm doing now</h1>
       <p className="now-updated">Updated April 10, 2026</p>
+      <figure className="now-photo">
+        <img src="/media/cascades.jpeg" alt="North Cascades mountain ridge at dusk" />
+        <figcaption>North Cascades, taken on my Canon Rebel T7.</figcaption>
+      </figure>
 
       <div className="now-copy">
         <p>

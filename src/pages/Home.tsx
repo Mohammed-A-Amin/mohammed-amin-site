@@ -129,11 +129,15 @@ export default function Home() {
                 <ScrambleText text={thirdParagraph} delay={1120} duration={1500} />
               </p>
             </div>
-            <div className="about-carousel-wrap" aria-label="Personal photo carousel">
+            <div
+              className={`about-carousel-wrap ${isPortraitRevealed ? 'is-revealed' : 'is-revealing'}`}
+              aria-label="Personal photo carousel"
+            >
               <div className="about-carousel-track">
                 {[...funPhotos, ...funPhotos].map((photo, index) => (
                   <div key={`${photo}-${index}`} className="about-carousel-item">
-                    <img src={photo} alt="" loading="lazy" />
+                    <img className="carousel-image-base" src={photo} alt="" loading="lazy" />
+                    <img className="carousel-image-color" src={photo} alt="" loading="lazy" aria-hidden />
                   </div>
                 ))}
               </div>

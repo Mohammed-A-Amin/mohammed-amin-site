@@ -619,6 +619,7 @@ img {
 }
 
 .about-carousel-item {
+  position: relative;
   width: clamp(118px, 10vw, 154px);
   aspect-ratio: 4 / 3;
   flex: 0 0 auto;
@@ -633,6 +634,28 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.carousel-image-base {
+  filter: grayscale(1) contrast(1.08) brightness(0.94);
+}
+
+.carousel-image-color {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.about-carousel-wrap.is-revealing .carousel-image-color {
+  animation: portrait-color-reveal 4.9s ease 3s forwards;
+}
+
+.about-carousel-wrap.is-revealed .carousel-image-base {
+  filter: none;
+}
+
+.about-carousel-wrap.is-revealed .carousel-image-color {
+  display: none;
 }
 
 .carousel-scroll-cue {
@@ -745,6 +768,28 @@ img {
   font-size: 13.5px;
   font-style: italic;
   line-height: 1.5;
+}
+
+.now-photo {
+  margin: clamp(16px, 2.6vw, 24px) 0 0;
+}
+
+.now-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+}
+
+.now-photo figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-style: italic;
+  line-height: 1.45;
 }
 
 .now-copy {
