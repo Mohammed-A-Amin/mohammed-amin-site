@@ -431,12 +431,10 @@ img {
   position: absolute;
   inset: 0;
   opacity: 0;
-  clip-path: inset(0 0 100% 0);
 }
 
 .portrait.is-revealing .portrait-color {
-  opacity: 1;
-  animation: portrait-color-reveal 4.9s cubic-bezier(0.22, 1, 0.36, 1) 3s forwards;
+  animation: portrait-color-reveal 4.9s ease 3s forwards;
 }
 
 .portrait.is-revealed .portrait-base {
@@ -449,11 +447,11 @@ img {
 
 @keyframes portrait-color-reveal {
   0% {
-    clip-path: inset(0 0 100% 0);
+    opacity: 0;
   }
 
   100% {
-    clip-path: inset(0 0 0 0);
+    opacity: 1;
   }
 }
 
