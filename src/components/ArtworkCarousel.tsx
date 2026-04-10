@@ -40,7 +40,7 @@ export default function ArtworkCarousel({ items }: ArtworkCarouselProps) {
         <motion.div
           className="artwork-track"
           animate={{ x: `-${safeIndex * 100}%` }}
-          transition={{ type: 'spring', stiffness: 70, damping: 18, mass: 0.65 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           {items.map((item) => (
             <figure key={`${item.title}-${item.image}`} className="artwork-slide">

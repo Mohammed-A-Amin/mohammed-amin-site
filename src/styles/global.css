@@ -46,6 +46,10 @@ body,
   min-height: 100%;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -94,6 +98,8 @@ img {
 
 .app-shell {
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   isolation: isolate;
 }
@@ -133,6 +139,10 @@ img {
 .app-shell > .container {
   position: relative;
   z-index: 1;
+}
+
+.app-shell > .container:not(.footer) {
+  flex: 1;
 }
 
 .container {
@@ -408,7 +418,6 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center 56%;
-  filter: grayscale(1) contrast(1.08) brightness(0.94);
 }
 
 .about-content {
@@ -575,7 +584,6 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
 }
 
 @keyframes about-carousel-slide {
@@ -801,7 +809,7 @@ img {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 18px;
+  padding: 16px 18px 18px;
 }
 
 .card-meta-row {
@@ -809,7 +817,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 22px;
+  min-height: 24px;
   margin-bottom: 12px;
 }
 
@@ -818,6 +826,12 @@ img {
   align-items: center;
   gap: 8px;
   min-width: 0;
+}
+
+.card-meta-row .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
 }
 
 .new-badge {
@@ -837,10 +851,14 @@ img {
 }
 
 .card-arrow {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
+  line-height: 1;
 }
 
 .card h3 {
