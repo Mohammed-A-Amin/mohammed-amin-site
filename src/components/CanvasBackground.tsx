@@ -25,7 +25,6 @@ type ShootingStar = {
 
 type Constellation = {
   name: string
-  label?: string
   points: Array<[number, number]>
   edges: Array<[number, number]>
 }
@@ -44,7 +43,6 @@ const CONSTELLATION_DURATION = 5000
 const constellations: Constellation[] = [
   {
     name: 'Aries',
-    label: 'Sun / Aries',
     points: [
       [0.16, 0.54],
       [0.44, 0.42],
@@ -55,7 +53,6 @@ const constellations: Constellation[] = [
   },
   {
     name: 'Leo',
-    label: 'Moon / Leo',
     points: [
       [0.12, 0.68],
       [0.28, 0.42],
@@ -69,7 +66,6 @@ const constellations: Constellation[] = [
   },
   {
     name: 'Taurus',
-    label: 'Rising / Taurus',
     points: [
       [0.18, 0.54],
       [0.36, 0.42],
@@ -373,14 +369,6 @@ const drawConstellation = (
     context.fillStyle = `rgba(${color}, ${alpha * 0.045})`
     context.fill()
   })
-
-  if (active.constellation.label) {
-    context.shadowBlur = 0
-    context.font = '12px "Noto Serif", Georgia, serif'
-    context.letterSpacing = '0px'
-    context.fillStyle = `rgba(${color}, ${alpha * 0.34})`
-    context.fillText(active.constellation.label, active.x, active.y + active.size + 24)
-  }
 
   context.restore()
 }
