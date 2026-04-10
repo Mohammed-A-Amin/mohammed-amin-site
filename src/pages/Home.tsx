@@ -80,17 +80,39 @@ const funPhotos = [
 ]
 
 export default function Home() {
+  const [isPortraitRevealed, setIsPortraitRevealed] = useState(() => (
+    typeof window !== 'undefined' && window.sessionStorage.getItem('portrait-color-revealed') === 'true'
+  ))
   const heading = "Hi, I'm Mohammed."
   const firstParagraph = "I'm a software engineer, filmmaker, and first-gen Bangladeshi-American."
   const secondParagraph = "I'm currently a junior studying EECS at UC Berkeley and an intern at OpenAI. I focus on building innovative solutions at the intersection of human-computer interaction and AI. Previously, I interned at AWS on the EC2 Private Pricing team."
   const thirdParagraph = 'Outside of work, I like creating short films, playing tabla, video games, weightlifting, and hiking (check out the latest hikes below!)'
 
+  useEffect(() => {
+    if (isPortraitRevealed) return
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      window.sessionStorage.setItem('portrait-color-revealed', 'true')
+      setIsPortraitRevealed(true)
+      return
+    }
+
+    const timerId = window.setTimeout(() => {
+      window.sessionStorage.setItem('portrait-color-revealed', 'true')
+      setIsPortraitRevealed(true)
+    }, 8200)
+
+    return () => window.clearTimeout(timerId)
+  }, [isPortraitRevealed])
+
   return (
     <section id="home" className="home-shell scroll-section">
       <div className="home-intro">
         <div className="about-layout">
-          <div className="portrait">
-            <img src="/media/headsh.jpg" alt="Mohammed" />
+          <div className={`portrait ${isPortraitRevealed ? 'is-revealed' : 'is-revealing'}`}>
+            <img className="portrait-base" src="/media/headsh.jpg" alt="Mohammed" />
+            <img className="portrait-color" src="/media/headsh.jpg" alt="" aria-hidden />
           </div>
           <div className="about-content">
             <h1 className="about-title">

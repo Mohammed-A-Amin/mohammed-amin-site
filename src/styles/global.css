@@ -404,6 +404,7 @@ img {
 }
 
 .portrait {
+  position: relative;
   overflow: hidden;
   margin-top: clamp(16px, 1.9vw, 26px);
   aspect-ratio: 1 / 1.12;
@@ -419,6 +420,41 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center 56%;
+}
+
+.portrait-base {
+  filter: grayscale(1) contrast(1.08) brightness(0.94);
+  transition: filter 420ms ease;
+}
+
+.portrait-color {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+}
+
+.portrait.is-revealing .portrait-color {
+  opacity: 1;
+  animation: portrait-color-reveal 4.9s cubic-bezier(0.22, 1, 0.36, 1) 3s forwards;
+}
+
+.portrait.is-revealed .portrait-base {
+  filter: none;
+}
+
+.portrait.is-revealed .portrait-color {
+  display: none;
+}
+
+@keyframes portrait-color-reveal {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 .about-content {
