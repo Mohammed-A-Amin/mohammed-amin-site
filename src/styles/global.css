@@ -601,6 +601,10 @@ img {
   object-fit: cover;
 }
 
+.carousel-scroll-cue {
+  display: none;
+}
+
 @keyframes about-carousel-slide {
   from {
     transform: translateX(0);
@@ -608,6 +612,29 @@ img {
 
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes carousel-scroll-cue {
+  0%,
+  72%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(0);
+  }
+
+  8%,
+  34% {
+    opacity: 0.82;
+  }
+
+  18% {
+    transform: translate(-50%, -50%) translateX(-9px);
+  }
+
+  42% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(14px);
   }
 }
 
@@ -1354,6 +1381,11 @@ img {
     margin-top: 20px;
   }
 
+  .about-carousel-wrap::before,
+  .about-carousel-wrap::after {
+    width: 44px;
+  }
+
   .about-carousel-track {
     overflow-x: auto;
     width: 100%;
@@ -1369,6 +1401,54 @@ img {
   .about-carousel-item {
     width: min(58vw, 190px);
     scroll-snap-align: start;
+  }
+
+  .carousel-scroll-cue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    display: grid;
+    width: 48px;
+    height: 34px;
+    place-items: center;
+    pointer-events: none;
+    border: 1px solid color-mix(in srgb, var(--text) 26%, transparent);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+    animation: carousel-scroll-cue 8.5s ease-in-out infinite;
+  }
+
+  .carousel-scroll-cue span {
+    position: relative;
+    width: 22px;
+    height: 12px;
+    border-top: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
+    border-right: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
+    transform: skewX(-18deg);
+  }
+
+  .carousel-scroll-cue span::before,
+  .carousel-scroll-cue span::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
+  }
+
+  .carousel-scroll-cue span::before {
+    left: -2px;
+    border-left: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
+    transform: rotate(-45deg);
+  }
+
+  .carousel-scroll-cue span::after {
+    right: -4px;
+    border-right: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
+    transform: rotate(45deg);
   }
 
   .search-backdrop {
