@@ -116,9 +116,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <div className="carousel-scroll-cue" aria-hidden>
-                <span />
-              </div>
+              <div className="carousel-scroll-cue" aria-hidden />
             </div>
           </div>
         </div>

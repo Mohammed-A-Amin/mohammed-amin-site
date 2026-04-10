@@ -1409,46 +1409,42 @@ img {
     left: 50%;
     z-index: 4;
     display: grid;
-    width: 48px;
-    height: 34px;
+    width: 46px;
+    height: 30px;
     place-items: center;
     pointer-events: none;
-    border: 1px solid color-mix(in srgb, var(--text) 26%, transparent);
-    border-radius: var(--radius-md);
-    background: color-mix(in srgb, var(--surface) 72%, transparent);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+    border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--surface) 64%, transparent);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
     animation: carousel-scroll-cue 8.5s ease-in-out infinite;
   }
 
-  .carousel-scroll-cue span {
-    position: relative;
-    width: 22px;
-    height: 12px;
-    border-top: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
-    border-right: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
-    transform: skewX(-18deg);
-  }
-
-  .carousel-scroll-cue span::before,
-  .carousel-scroll-cue span::after {
+  .carousel-scroll-cue::before,
+  .carousel-scroll-cue::after {
     content: "";
     position: absolute;
-    top: -5px;
-    width: 7px;
-    height: 7px;
-    border-top: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
+    top: 50%;
+    left: 50%;
+    display: block;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
   }
 
-  .carousel-scroll-cue span::before {
-    left: -2px;
-    border-left: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
-    transform: rotate(-45deg);
+  .carousel-scroll-cue::before {
+    width: 20px;
+    height: 1.5px;
+    background: color-mix(in srgb, var(--text) 70%, transparent);
   }
 
-  .carousel-scroll-cue span::after {
-    right: -4px;
-    border-right: 2px solid color-mix(in srgb, var(--text) 72%, transparent);
-    transform: rotate(45deg);
+  .carousel-scroll-cue::after {
+    width: 8px;
+    height: 8px;
+    margin-left: 8px;
+    border-top: 1.5px solid color-mix(in srgb, var(--text) 70%, transparent);
+    border-right: 1.5px solid color-mix(in srgb, var(--text) 70%, transparent);
+    border-radius: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
   }
 
   .search-backdrop {
