@@ -1,0 +1,118 @@
+{
+  "basics": {
+    "name": "Mohammed Amin",
+    "label": "Software Engineer, Researcher, Filmmaker",
+    "email": "mohammedamin@berkeley.edu",
+    "url": "https://mohammedam.in",
+    "summary": "UC Berkeley EECS student and OpenAI intern building AI systems, human-computer interaction tools, mixed reality experiences, production software, research prototypes, and visual media.",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "url": "https://www.linkedin.com/in/mohammed-a-amin/"
+      },
+      {
+        "network": "GitHub",
+        "url": "https://github.com/Mohammed-A-Amin"
+      },
+      {
+        "network": "Google Scholar",
+        "url": "https://scholar.google.com/citations?hl=en&user=M8vdbgEAAAAJ"
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "University of California, Berkeley",
+      "area": "Electrical Engineering and Computer Sciences",
+      "studyType": "Bachelor's"
+    }
+  ],
+  "work": [
+    {
+      "name": "OpenAI",
+      "position": "Member of Technical Staff Intern",
+      "startDate": "2026-06",
+      "summary": "Software engineering internship focused on AI systems."
+    },
+    {
+      "name": "Amazon Web Services",
+      "position": "Software Engineer Intern, EC2 Private Pricing",
+      "startDate": "2025-05",
+      "endDate": "2025-08",
+      "highlights": [
+        "Built middle-of-month support in the EC2 PRC Console, enabling late enterprise contract onboarding and reducing on-call load by 16%.",
+        "Implemented subscription time tracking across EC2 pricing models with Java and DynamoDB, cutting escalations across more than 86 support tickets.",
+        "Engineered async purchase analysis and refund ticketing with EventBridge, Lambda, Athena, S3, and Step Functions.",
+        "Added real-time telemetry in the PRC Console with React and Redux, reducing late-contract ingestion errors by 20%."
+      ]
+    },
+    {
+      "name": "Monad",
+      "position": "Contract Software Engineer",
+      "startDate": "2025-01",
+      "endDate": "2025-05",
+      "highlights": [
+        "Developed 10 Go connectors for a security ingestion pipeline across AWS, GCP, and Azure, increasing supported sources by 30%.",
+        "Integrated OCSF transformations using Go and GraphQL for normalized cross-cloud security data.",
+        "Built schema mapping UI flows in Svelte and supported deployments with Kubernetes, k9s, and Docker."
+      ]
+    },
+    {
+      "name": "Netflix",
+      "position": "Contract Software Engineer",
+      "startDate": "2024-08",
+      "endDate": "2024-12",
+      "highlights": [
+        "Designed a Flask backend for Netflix Interactive Titles, converting unstructured narrative data in Firebase into branching story nodes.",
+        "Integrated Llama 3.2 into the narrative engine to generate dynamic worlds, storylines, and player decision trees.",
+        "Used Stable Diffusion models on LAION data to generate high-quality 2D assets from text prompts."
+      ]
+    },
+    {
+      "name": "Berkeley AI Research and Meta",
+      "position": "Undergraduate Researcher",
+      "startDate": "2024-01",
+      "endDate": "2025-12",
+      "highlights": [
+        "Developed ScenicSynth for learning coordinated physical tasks, improving code synthesis efficiency by 45% over traditional programming by demonstration methods.",
+        "Engineered an AR interface in Scenic for spatio-temporal and verbal data collection using C# and OpenAI Whisper.",
+        "Synchronized AR trajectory streams with verbal data across Firebase and Firestore for real-time execution in 3.8 seconds."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Software Engineering",
+      "keywords": ["React", "Redux", "Java", "Go", "GraphQL", "Kubernetes", "Docker", "Svelte", "Flask", "Next.js", "MongoDB"]
+    },
+    {
+      "name": "Cloud and Data Systems",
+      "keywords": ["AWS", "DynamoDB", "EventBridge", "Lambda", "Athena", "S3", "Step Functions", "Firebase", "Firestore"]
+    },
+    {
+      "name": "AI and Research",
+      "keywords": ["AI Systems", "Human-Computer Interaction", "Mixed Reality", "OpenAI Whisper", "PyTorch", "Stable Diffusion", "Llama", "LangChain"]
+    },
+    {
+      "name": "AR/VR and Mobile",
+      "keywords": ["Unity", "C#", "Meta Quest SDK", "Swift", "SwiftUI", "RealityKit", "ARKit"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Interactive Program Synthesis for Modeling Collaborative Physical Activities from Narrated Demonstrations",
+      "url": "https://arxiv.org/abs/2509.24250",
+      "description": "Co-authored research on learning collaborative physical tasks from narrated mixed-reality demonstrations by representing behavior as editable programs."
+    },
+    {
+      "name": "TaleTutor",
+      "url": "https://devpost.com/software/taletutor",
+      "description": "Built an education technology platform that turns teacher-uploaded PDFs into interactive themed lessons with contextual question answering."
+    },
+    {
+      "name": "barber.ai",
+      "url": "https://github.com/Mohammed-A-Amin/barber.ai",
+      "description": "Built an AR app for virtual hairstyle try-on with real-time 3D overlays and personalized recommendations."
+    }
+  ]
+}

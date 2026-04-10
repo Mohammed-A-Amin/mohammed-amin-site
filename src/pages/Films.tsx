@@ -7,7 +7,7 @@ export default function Media() {
   return (
     <section className="page-shell section-shell">
       <header className="page-header">
-        <p className="page-kicker">Media</p>
+        <h1 className="page-kicker">Media</h1>
         <p className="page-note">
           Ever since middle school, I've enjoyed creating visual media, ranging from film to art. I still carry that
           passion with me throughout my studies at Berkeley.
