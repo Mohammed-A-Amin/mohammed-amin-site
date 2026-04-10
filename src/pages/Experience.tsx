@@ -3,11 +3,10 @@ import experience from '../data/experience'
 export default function Experience() {
   return (
     <section className="page-shell experience-shell">
-      <header className="page-header">
+      <header className="page-header experience-page-header">
         <p className="page-kicker">Experience</p>
-        <h1 className="page-title">Engineering, research, and product work.</h1>
-        <p className="page-intro">
-          A focused record of the teams, systems, and research environments where I have built production software and experimental interfaces.
+        <p className="page-note">
+          I&apos;ve had the chance to work, research, and build with many talented people across different industries, companies, and teams.
         </p>
       </header>
       <div className="experience-list">

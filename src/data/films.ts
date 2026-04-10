@@ -2,6 +2,14 @@ import type { Film } from '../components/FilmCard'
 
 const films: Film[] = [
   {
+    title: 'The Plexvengers',
+    description: 'The SECOND greatest hiking trailer of all time.',
+    year: '2026',
+    isNew: true,
+    thumbnail: '/media/plexvengers.png',
+    videoUrl: 'https://www.youtube.com/watch?v=faP7MgeeqYQ'
+  },
+  {
     title: 'PlexTech XXL Cypher',
     description: 'The brightest minds in Berkeley come together to create the Greatest Cypher of All Time.',
     year: '2025',

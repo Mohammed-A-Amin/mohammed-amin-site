@@ -1,6 +1,4 @@
-import { Github, GraduationCap, Instagram, Linkedin, Mail } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$%#&*<>/[]{}'
 
@@ -72,80 +70,51 @@ function createScramble(text: string, revealedCount: number) {
   }).join('')
 }
 
-const socialLinks = [
-  {
-    href: 'https://www.linkedin.com/in/mohammed-a-amin/',
-    label: 'LinkedIn',
-    icon: Linkedin
-  },
-  {
-    href: 'https://github.com/Mohammed-A-Amin',
-    label: 'GitHub',
-    icon: Github
-  },
-  {
-    href: 'https://scholar.google.com/citations?hl=en&user=M8vdbgEAAAAJ',
-    label: 'Google Scholar',
-    icon: GraduationCap
-  },
-  {
-    href: 'https://www.instagram.com/moh4mm3dd',
-    label: 'Instagram',
-    icon: Instagram
-  }
+const funPhotos = [
+  '/media/zion.png',
+  '/media/pp.png',
+  '/media/snow.png',
+  '/media/sun.JPG',
+  '/media/rainier.png'
 ]
 
 export default function Home() {
-  const intro = 'Software engineer, researcher, and filmmaker'
-  const heading = "Hi, I'm Mohammed Amin."
-  const firstParagraph = "I'm a junior studying EECS at UC Berkeley, building at the intersection of human-computer interaction, AI systems, and mixed reality."
-  const secondParagraph = 'My work spans research prototypes, production engineering, and creative media, with recent experience across OpenAI, AWS, Netflix, Monad, and Berkeley AI Research.'
-  const thirdParagraph = 'Outside the lab and editor, I make short films, play tabla, hike, lift, and look for ways to turn technical ideas into human experiences.'
+  const heading = "Hi, I'm Mohammed."
+  const firstParagraph = "I'm a software engineer, filmmaker, and first-gen Bangladeshi-American."
+  const secondParagraph = "I'm currently a junior studying EECS at UC Berkeley and an intern at OpenAI. I focus on building innovative solutions at the intersection of human-computer interaction and AI. Previously, I interned at AWS on the EC2 Private Pricing team."
+  const thirdParagraph = 'Outside of work, I like creating short films, playing tabla, video games, weightlifting, and hiking (check out the latest hikes below!)'
 
   return (
     <section id="home" className="home-shell scroll-section">
       <div className="home-intro">
         <div className="about-layout">
           <div className="portrait">
-            <img src="/media/mmdsmile.png" alt="Mohammed Amin" />
+            <img src="/media/headsh.jpg" alt="Mohammed" />
           </div>
           <div className="about-content">
-            <p className="hero-kicker"><ScrambleText text={intro} duration={720} /></p>
             <h1 className="about-title">
-              <ScrambleText text={heading} delay={120} duration={840} />
+              {heading}
             </h1>
             <div className="about-rule" />
             <div className="about-short">
               <p>
-                <ScrambleText text={firstParagraph} delay={420} duration={980} />
+                <ScrambleText text={firstParagraph} delay={520} duration={1300} />
               </p>
               <p>
-                <ScrambleText text={secondParagraph} delay={640} duration={1080} />
+                <ScrambleText text={secondParagraph} delay={820} duration={1600} />
               </p>
               <p>
-                <ScrambleText text={thirdParagraph} delay={860} duration={1080} />
+                <ScrambleText text={thirdParagraph} delay={1120} duration={1500} />
               </p>
             </div>
-            <div className="about-actions">
-              <Link className="button primary" to="/projects">Selected work</Link>
-              <a className="button secondary" href="mailto:mohammedamin@berkeley.edu">
-                <Mail size={16} aria-hidden />
-                Contact
-              </a>
-            </div>
-            <div className="about-socials">
-              {socialLinks.map(({ href, label, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="about-social-link"
-                >
-                  <Icon size={17} strokeWidth={1.9} aria-hidden />
-                  <span>{label}</span>
-                </a>
-              ))}
+            <div className="about-carousel-wrap" aria-label="Personal photo carousel">
+              <div className="about-carousel-track">
+                {[...funPhotos, ...funPhotos].map((photo, index) => (
+                  <div key={`${photo}-${index}`} className="about-carousel-item">
+                    <img src={photo} alt="" loading="lazy" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

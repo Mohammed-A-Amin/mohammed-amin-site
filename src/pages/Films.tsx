@@ -8,9 +8,9 @@ export default function Media() {
     <section className="page-shell section-shell">
       <header className="page-header">
         <p className="page-kicker">Media</p>
-        <h1 className="page-title">Films, visual work, and photography.</h1>
-        <p className="page-intro">
-          Creative work from short films to visual art and photography, shaped by the same interest in interaction and storytelling.
+        <p className="page-note">
+          Ever since middle school, I've enjoyed creating visual media, ranging from film to art. I still carry that
+          passion with me throughout my studies at Berkeley.
         </p>
       </header>
       <div className="grid">

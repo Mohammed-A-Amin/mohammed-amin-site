@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Media from './pages/Films'
 import Experience from './pages/Experience'
+import Now from './pages/Now'
+import Tabla from './pages/Tabla'
 
 function Page({ children }: { children: React.ReactNode }) {
   return (
@@ -41,6 +43,8 @@ export default function App() {
         <Route path="/experience" element={<Page><Experience /></Page>} />
         <Route path="/projects" element={<Page><Projects /></Page>} />
         <Route path="/media" element={<Page><Media /></Page>} />
+        <Route path="/now" element={<Page><Now /></Page>} />
+        <Route path="/tabla" element={<Page><Tabla /></Page>} />
         <Route path="/films" element={<Navigate to="/media" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

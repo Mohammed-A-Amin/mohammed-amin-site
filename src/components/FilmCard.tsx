@@ -6,6 +6,7 @@ export type Film = {
   title: string
   description?: string
   year?: string
+  isNew?: boolean
   thumbnail?: string
   videoUrl?: string // YouTube/Vimeo URL
 }
@@ -21,7 +22,10 @@ export default function FilmCard({ f }: { f: Film }) {
         </div>
         <div className="card-body">
           <div className="card-meta-row">
-            {f.year && <span className="eyebrow">{f.year}</span>}
+            <div className="card-meta-left">
+              {f.year && <span className="eyebrow">{f.year}</span>}
+              {f.isNew && <span className="new-badge">New</span>}
+            </div>
             <span className="card-arrow" aria-hidden>Play</span>
           </div>
           <h3>{f.title}</h3>

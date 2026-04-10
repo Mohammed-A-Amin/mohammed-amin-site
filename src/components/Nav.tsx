@@ -1,12 +1,7 @@
-import { Moon, Sun } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import SearchDialog from './SearchDialog'
 
-type NavProps = {
-  theme: 'light' | 'dark'
-  onToggleTheme: () => void
-}
-
-export default function Nav({ theme, onToggleTheme }: NavProps) {
+export default function Nav() {
   return (
     <div className="nav-wrap">
       <NavLink to="/" className="brand">Mohammed Amin</NavLink>
@@ -16,16 +11,10 @@ export default function Nav({ theme, onToggleTheme }: NavProps) {
           <NavLink to="/experience" className={({ isActive }) => isActive ? 'active' : undefined}>Experience</NavLink>
           <NavLink to="/projects" className={({ isActive }) => isActive ? 'active' : undefined}>Projects</NavLink>
           <NavLink to="/media" className={({ isActive }) => isActive ? 'active' : undefined}>Media</NavLink>
+          <NavLink to="/tabla" className={({ isActive }) => isActive ? 'active' : undefined}>Tabla</NavLink>
+          <NavLink to="/now" className={({ isActive }) => isActive ? 'active' : undefined}>Now</NavLink>
         </nav>
-        <button
-          type="button"
-          className="theme-switch"
-          onClick={onToggleTheme}
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-        >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
+        <SearchDialog />
       </div>
     </div>
   )
