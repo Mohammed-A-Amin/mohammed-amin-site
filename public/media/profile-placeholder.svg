@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1400" viewBox="0 0 1200 1400" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="1400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#191919"/>
+      <stop offset="1" stop-color="#0B0B0B"/>
+    </linearGradient>
+    <filter id="grain" x="0" y="0" width="1200" height="1400" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency="0.86" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.18"/>
+      </feComponentTransfer>
+    </filter>
+    <radialGradient id="light" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(430 260) rotate(61.576) scale(820 780)">
+      <stop stop-color="#E4E4E4"/>
+      <stop offset="1" stop-color="#5F5F5F"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="1400" fill="url(#bg)"/>
+  <ellipse cx="610" cy="480" rx="410" ry="350" fill="#161616"/>
+  <ellipse cx="620" cy="490" rx="320" ry="300" fill="url(#light)"/>
+  <path d="M470 585c23-80 103-122 165-122s141 42 164 122c28 96-56 203-164 203-112 0-192-104-165-203Z" fill="#F2F2F2"/>
+  <path d="M381 1000c43-147 166-234 282-234 114 0 239 86 283 234v218H381v-218Z" fill="#C7C7C7"/>
+  <rect width="1200" height="1400" filter="url(#grain)"/>
+  <rect x="34" y="34" width="1132" height="1332" rx="20" stroke="#4A4A4A" stroke-width="2"/>
+  <text x="84" y="1278" fill="#D5D5D5" font-family="Sora, sans-serif" font-size="42" letter-spacing="3">REPLACE WITH YOUR PHOTO</text>
+</svg>
