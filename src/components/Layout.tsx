@@ -1,27 +1,25 @@
 import { useEffect, useState } from 'react'
 import Nav from './Nav'
-import ThreeBackground from './ThreeBackground'
 
 type Theme = 'light' | 'dark'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'dark'
-    const saved = localStorage.getItem('theme')
+    const saved = localStorage.getItem('theme-v2')
     if (saved === 'light' || saved === 'dark') return saved
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    return 'dark'
   })
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
+    localStorage.setItem('theme-v2', theme)
   }, [theme])
 
   const toggleTheme = () => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))
 
   return (
-    <div>
-      <ThreeBackground theme={theme} />
+    <div className="app-shell">
       <header className="header">
         <Nav theme={theme} onToggleTheme={toggleTheme} />
       </header>

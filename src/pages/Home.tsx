@@ -1,14 +1,76 @@
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
-import { Github, GraduationCap, Instagram, Linkedin } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { Github, GraduationCap, Instagram, Linkedin, Mail } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const funPhotos = [
-  '/media/zion.png',
-  '/media/pp.png',
-  '/media/snow.png',
-  '/media/sun.JPG',
-  '/media/rainier.png'
-]
+const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$%#&*<>/[]{}'
+
+function ScrambleText({
+  text,
+  delay = 0,
+  duration = 900
+}: {
+  text: string
+  delay?: number
+  duration?: number
+}) {
+  const [displayText, setDisplayText] = useState(text)
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      setDisplayText(text)
+      return
+    }
+
+    let animationFrame = 0
+    let startTime = 0
+    let hasStarted = false
+
+    const scramble = (timestamp: number) => {
+      if (!hasStarted) {
+        hasStarted = true
+        startTime = timestamp
+      }
+
+      const elapsed = Math.max(0, timestamp - startTime - delay)
+      const progress = Math.min(elapsed / duration, 1)
+      const revealedCount = Math.floor(progress * text.length)
+
+      if (elapsed < 0) {
+        setDisplayText(createScramble(text, 0))
+        animationFrame = window.requestAnimationFrame(scramble)
+        return
+      }
+
+      setDisplayText(createScramble(text, revealedCount))
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(scramble)
+      } else {
+        setDisplayText(text)
+      }
+    }
+
+    setDisplayText(createScramble(text, 0))
+    animationFrame = window.requestAnimationFrame(scramble)
+
+    return () => window.cancelAnimationFrame(animationFrame)
+  }, [delay, duration, text])
+
+  return (
+    <span className="decrypt-text" aria-label={text}>
+      <span aria-hidden>{displayText}</span>
+    </span>
+  )
+}
+
+function createScramble(text: string, revealedCount: number) {
+  return Array.from(text, (char, index) => {
+    if (char.trim() === '' || index < revealedCount) return char
+    if (/[.,'’\-]/.test(char)) return char
+    return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+  }).join('')
+}
 
 const socialLinks = [
   {
@@ -34,145 +96,60 @@ const socialLinks = [
 ]
 
 export default function Home() {
-  const headingText = "Hi, I'm Mohammed."
-  const sectionRef = useRef<HTMLElement | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
-  const [typedHeading, setTypedHeading] = useState('')
-  const [showParagraph, setShowParagraph] = useState(false)
-  const [showCarousel, setShowCarousel] = useState(false)
-  const [showLinks, setShowLinks] = useState(false)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start']
-  })
-
-  const yTarget = useTransform(scrollYProgress, [0, 0.7, 1], [0, -72, -122])
-  const introY = useSpring(yTarget, { stiffness: 120, damping: 24, mass: 0.32 })
-  const introScale = useTransform(scrollYProgress, [0, 0.7, 1], [1.02, 1, 0.985])
-  const introOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.9])
-  const cueOpacity = useTransform(scrollYProgress, [0, 0.16, 0.26], [0.96, 0.96, 0])
-  const cueY = useTransform(scrollYProgress, [0, 0.26], [0, -10])
-  const headingComplete = typedHeading.length === headingText.length
-  const renderedPhotos = isMobile ? funPhotos : [...funPhotos, ...funPhotos]
-
-  useEffect(() => {
-    const updateIsMobile = () => setIsMobile(window.innerWidth <= 900)
-    updateIsMobile()
-    window.addEventListener('resize', updateIsMobile)
-    return () => window.removeEventListener('resize', updateIsMobile)
-  }, [])
-
-  useEffect(() => {
-    let charIndex = 0
-    const timer = window.setInterval(() => {
-      charIndex += 1
-      setTypedHeading(headingText.slice(0, charIndex))
-
-      if (charIndex >= headingText.length) {
-        window.clearInterval(timer)
-      }
-    }, 82)
-
-    return () => window.clearInterval(timer)
-  }, [headingText])
-
-  useEffect(() => {
-    if (!headingComplete) return
-
-    const paragraphTimer = window.setTimeout(() => setShowParagraph(true), 180)
-    const carouselTimer = window.setTimeout(() => setShowCarousel(true), 860)
-    const linksTimer = window.setTimeout(() => setShowLinks(true), 1700)
-
-    return () => {
-      window.clearTimeout(paragraphTimer)
-      window.clearTimeout(carouselTimer)
-      window.clearTimeout(linksTimer)
-    }
-  }, [headingComplete])
-
-  const scrollToExperience = () => {
-    document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  const intro = 'Software engineer, researcher, and filmmaker'
+  const heading = "Hi, I'm Mohammed Amin."
+  const firstParagraph = "I'm a junior studying EECS at UC Berkeley, building at the intersection of human-computer interaction, AI systems, and mixed reality."
+  const secondParagraph = 'My work spans research prototypes, production engineering, and creative media, with recent experience across OpenAI, AWS, Netflix, Monad, and Berkeley AI Research.'
+  const thirdParagraph = 'Outside the lab and editor, I make short films, play tabla, hike, lift, and look for ways to turn technical ideas into human experiences.'
 
   return (
-    <section id="home" ref={sectionRef} className="home-shell scroll-section">
-      <motion.div className="home-intro" style={{ y: isMobile ? 0 : introY, scale: isMobile ? 1 : introScale, opacity: introOpacity }}>
+    <section id="home" className="home-shell scroll-section">
+      <div className="home-intro">
         <div className="about-layout">
-          <div
-            className="portrait"
-          >
-            <img src="/media/mmdsmile.png" alt="Portrait of Mohammed Amin" />
+          <div className="portrait">
+            <img src="/media/mmdsmile.png" alt="Mohammed Amin" />
           </div>
           <div className="about-content">
+            <p className="hero-kicker"><ScrambleText text={intro} duration={720} /></p>
             <h1 className="about-title">
-              {typedHeading}
-              {!headingComplete && <span className="type-cursor" aria-hidden>|</span>}
+              <ScrambleText text={heading} delay={120} duration={840} />
             </h1>
-            {showParagraph && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.62, ease: 'easeOut' }}
-              >
-                <div className="about-rule" />
-                <div className="about-short">
-                  <p>I'm a software engineer, filmmaker, and first-gen Bangladeshi-American.</p>
-                  <p>I&apos;m currently a junior studying EECS at UC Berkeley focused on building innovative solutions at the intersection of human-computer interaction and AI.</p>
-                  <p>Outside of work, I like hiking, creating short films, playing tabla, video games, and weightlifting.</p>
-
-                </div>
-              </motion.div>
-            )}
-            {showCarousel && (
-              <motion.div
-                className="about-carousel-wrap"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.74, ease: 'easeOut' }}
-              >
-                <div className={`about-carousel-track${isMobile ? ' mobile' : ''}`}>
-                  {renderedPhotos.map((photo, index) => (
-                    <div key={`${photo}-${index}`} className="about-carousel-item">
-                      <img src={photo} alt="Fun memory" loading="lazy" />
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-            {showLinks && (
-              <motion.div
-                className="about-socials"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.72, ease: 'easeOut' }}
-              >
-                {socialLinks.map(({ href, label, icon: Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="about-social-link"
-                    aria-label={label}
-                    title={label}
-                  >
-                    <Icon size={isMobile ? 28 : 32} strokeWidth={2.1} />
-                  </a>
-                ))}
-              </motion.div>
-            )}
+            <div className="about-rule" />
+            <div className="about-short">
+              <p>
+                <ScrambleText text={firstParagraph} delay={420} duration={980} />
+              </p>
+              <p>
+                <ScrambleText text={secondParagraph} delay={640} duration={1080} />
+              </p>
+              <p>
+                <ScrambleText text={thirdParagraph} delay={860} duration={1080} />
+              </p>
+            </div>
+            <div className="about-actions">
+              <Link className="button primary" to="/projects">Selected work</Link>
+              <a className="button secondary" href="mailto:mohammedamin@berkeley.edu">
+                <Mail size={16} aria-hidden />
+                Contact
+              </a>
+            </div>
+            <div className="about-socials">
+              {socialLinks.map(({ href, label, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="about-social-link"
+                >
+                  <Icon size={17} strokeWidth={1.9} aria-hidden />
+                  <span>{label}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </motion.div>
-      <motion.button
-        type="button"
-        className="scroll-cue"
-        aria-label="Scroll to experience"
-        onClick={scrollToExperience}
-        style={{ opacity: cueOpacity, y: cueY }}
-      >
-        <span className="scroll-cue-arrow" aria-hidden>↓</span>
-      </motion.button>
+      </div>
     </section>
   )
 }

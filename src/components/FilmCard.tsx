@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import Modal from './Modal'
 import { toEmbedUrl } from '../utils'
 
@@ -16,14 +15,19 @@ export default function FilmCard({ f }: { f: Film }) {
   const embed = f.videoUrl ? toEmbedUrl(f.videoUrl) : null
   return (
     <>
-      <motion.button className="card grid-item six" onClick={() => setOpen(true)} whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}>
-        <div className="thumb" style={{ marginBottom: 12 }}>
+      <button className="card grid-item six" onClick={() => setOpen(true)}>
+        <div className="thumb">
           {f.thumbnail && <img src={f.thumbnail} alt="" />}
         </div>
-        <h3>{f.title}</h3>
-        {f.year && <div className="badge" style={{ margin: '8px 0 10px' }}>Year: {f.year}</div>}
-        {f.description && <p>{f.description}</p>}
-      </motion.button>
+        <div className="card-body">
+          <div className="card-meta-row">
+            {f.year && <span className="eyebrow">{f.year}</span>}
+            <span className="card-arrow" aria-hidden>Play</span>
+          </div>
+          <h3>{f.title}</h3>
+          {f.description && <p>{f.description}</p>}
+        </div>
+      </button>
       <Modal open={open} onClose={() => setOpen(false)}>
         {embed ? <iframe src={embed} title={f.title} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen /> : <div style={{ padding: 20 }}>No video URL provided.</div>}
       </Modal>
