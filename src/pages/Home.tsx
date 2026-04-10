@@ -100,7 +100,6 @@ export default function Home() {
 
     const timerId = window.setTimeout(() => {
       window.sessionStorage.setItem('portrait-color-revealed', 'true')
-      setIsPortraitRevealed(true)
     }, 8200)
 
     return () => window.clearTimeout(timerId)
