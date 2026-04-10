@@ -25,6 +25,7 @@ type ShootingStar = {
 
 type Constellation = {
   name: string
+  label?: string
   points: Array<[number, number]>
   edges: Array<[number, number]>
 }
@@ -37,10 +38,48 @@ type ActiveConstellation = {
   startedAt: number
 }
 
-const CONSTELLATION_INTERVAL = 20000
+const CONSTELLATION_INTERVAL = 10000
 const CONSTELLATION_DURATION = 5000
 
 const constellations: Constellation[] = [
+  {
+    name: 'Aries',
+    label: 'Sun / Aries',
+    points: [
+      [0.16, 0.54],
+      [0.44, 0.42],
+      [0.7, 0.5],
+      [0.86, 0.36]
+    ],
+    edges: [[0, 1], [1, 2], [2, 3]]
+  },
+  {
+    name: 'Leo',
+    label: 'Moon / Leo',
+    points: [
+      [0.12, 0.68],
+      [0.28, 0.42],
+      [0.38, 0.16],
+      [0.48, 0.34],
+      [0.64, 0.34],
+      [0.88, 0.42],
+      [0.72, 0.64]
+    ],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 0], [0, 6], [6, 5], [5, 4], [4, 1]]
+  },
+  {
+    name: 'Taurus',
+    label: 'Rising / Taurus',
+    points: [
+      [0.18, 0.54],
+      [0.36, 0.42],
+      [0.5, 0.54],
+      [0.36, 0.68],
+      [0.82, 0.2],
+      [0.86, 0.84]
+    ],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 0], [1, 4], [3, 5]]
+  },
   {
     name: 'Orion',
     points: [
@@ -67,6 +106,19 @@ const constellations: Constellation[] = [
       [0.92, 0.28]
     ],
     edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [4, 6]]
+  },
+  {
+    name: 'Big Dipper',
+    points: [
+      [0.08, 0.36],
+      [0.25, 0.28],
+      [0.43, 0.34],
+      [0.58, 0.26],
+      [0.7, 0.44],
+      [0.9, 0.5],
+      [0.84, 0.68]
+    ],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 4]]
   },
   {
     name: 'Cassiopeia',
@@ -103,6 +155,8 @@ const constellations: Constellation[] = [
     edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 1]]
   }
 ]
+
+const featuredConstellations = constellations.slice(0, 3)
 
 const randomBetween = (min: number, max: number) => min + Math.random() * (max - min)
 
@@ -211,11 +265,10 @@ const createShootingStar = (): ShootingStar => ({
   length: randomBetween(170, 260)
 })
 
-const createConstellation = (): ActiveConstellation => {
+const createConstellation = (constellation: Constellation): ActiveConstellation => {
   const width = window.innerWidth
   const height = window.innerHeight
   const size = Math.min(randomBetween(210, 360), width * 0.48, height * 0.42)
-  const constellation = constellations[Math.floor(Math.random() * constellations.length)]
 
   return {
     constellation,
@@ -321,6 +374,14 @@ const drawConstellation = (
     context.fill()
   })
 
+  if (active.constellation.label) {
+    context.shadowBlur = 0
+    context.font = '12px "Noto Serif", Georgia, serif'
+    context.letterSpacing = '0px'
+    context.fillStyle = `rgba(${color}, ${alpha * 0.34})`
+    context.fillText(active.constellation.label, active.x, active.y + active.size + 24)
+  }
+
   context.restore()
 }
 
@@ -345,7 +406,8 @@ export default function CanvasBackground({ theme }: CanvasBackgroundProps) {
     let stars: Star[] = []
     let shootingStars: ShootingStar[] = []
     let activeConstellation: ActiveConstellation | null = null
-    let lastConstellationAt = performance.now() - CONSTELLATION_INTERVAL + 24000
+    let constellationIndex = 0
+    let lastConstellationAt = performance.now() - CONSTELLATION_INTERVAL + 2500
     let frame = 0
     let animationFrame = 0
 
@@ -368,7 +430,8 @@ export default function CanvasBackground({ theme }: CanvasBackgroundProps) {
       if (!prefersReducedMotion) {
         const now = performance.now()
         if (!activeConstellation && now - lastConstellationAt >= CONSTELLATION_INTERVAL) {
-          activeConstellation = createConstellation()
+          activeConstellation = createConstellation(featuredConstellations[constellationIndex])
+          constellationIndex = (constellationIndex + 1) % featuredConstellations.length
           lastConstellationAt = now
         }
 
@@ -379,7 +442,7 @@ export default function CanvasBackground({ theme }: CanvasBackgroundProps) {
           }
         }
 
-        if (frame % 390 === 0 && shootingStars.length < 1) {
+        if (frame % 520 === 0 && shootingStars.length < 1) {
           shootingStars.push(createShootingStar())
         }
 
