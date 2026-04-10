@@ -57,7 +57,8 @@ function ScrambleText({
 
   return (
     <span className="decrypt-text" aria-label={text}>
-      <span aria-hidden>{displayText}</span>
+      <span className="decrypt-text-layout" aria-hidden>{text}</span>
+      <span className="decrypt-text-display" aria-hidden>{displayText}</span>
     </span>
   )
 }

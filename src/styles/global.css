@@ -399,12 +399,13 @@ img {
 .about-layout {
   display: grid;
   grid-template-columns: minmax(220px, 310px) minmax(0, 1fr);
-  align-items: center;
+  align-items: start;
   gap: clamp(34px, 5vw, 64px);
 }
 
 .portrait {
   overflow: hidden;
+  margin-top: clamp(16px, 1.9vw, 26px);
   aspect-ratio: 1 / 1.12;
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
@@ -426,7 +427,21 @@ img {
 }
 
 .decrypt-text {
+  position: relative;
+  display: block;
   font-variant-ligatures: none;
+}
+
+.decrypt-text-layout {
+  display: block;
+  visibility: hidden;
+}
+
+.decrypt-text-display {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
 }
 
 .hero-kicker,
@@ -1271,6 +1286,8 @@ img {
 
   .portrait {
     width: min(100%, 320px);
+    justify-self: center;
+    margin: 0 auto;
   }
 
   .about-title {
