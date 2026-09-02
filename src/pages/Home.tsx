@@ -85,7 +85,7 @@ export default function Home() {
   ))
   const heading = "Hi, I'm Mohammed."
   const firstParagraph = "I'm a software engineer, filmmaker, and first-gen Bangladeshi-American."
-  const secondParagraph = "I'm currently a junior studying EECS at UC Berkeley and an intern at OpenAI. I focus on building innovative solutions at the intersection of human-computer interaction and AI. Previously, I interned at AWS on the EC2 Private Pricing team."
+  const secondParagraph = "I'm currently a senior studying EECS at UC Berkeley. I focus on building innovative solutions at the intersection of human-computer interaction and AI. Previously, I interned at OpenAI and AWS."
   const thirdParagraph = 'Outside of work, I like creating short films, playing tabla, video games, weightlifting, and hiking (check out the latest hikes below!)'
 
   useEffect(() => {
